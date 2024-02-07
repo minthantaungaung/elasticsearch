@@ -1,0 +1,17 @@
+version: '1.0'
+services:
+  elasticsearch:
+    container_name: els
+  restart: always
+  image: docker.elastic.co/elasticsearch/elasticsearch
+  ports:
+    - 9200:9200
+  environment:
+    ELASTICSEARCH_HOSTS : http://es-container:9200
+    REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+    REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+    REGISTRY_AUTH: silly
+    REGISTRY_AUTH_SILLY_SERVICE: SILLY_SERVICE
+    REGISTRY_AUTH_SILLY_REALM: SILLY_REALM
+  volumes:
+    - /usr/certs:/certs
